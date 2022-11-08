@@ -38,5 +38,6 @@ public class Aireview extends JFrame {
 	
 	public static void main(String[] args) {
 		new Aireview();
+		new MyDatabase();
 	}
 }
