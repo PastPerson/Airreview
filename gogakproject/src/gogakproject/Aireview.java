@@ -8,36 +8,45 @@ import javax.swing.*;
 
 public class Aireview extends JFrame {
 	
-	public MainFrame mainframe = null;
-	public ViewFrame viewframe = null;
+	private MainFrame mainframe = null;
+	private ViewFrame viewframe = null;
+	private MyActionListener myac = null;
 	
-	public void change(String name) {
-		if(name.equals("MainFrame")) {
-			getContentPane().removeAll();
-			getContentPane().add(mainframe);
-			revalidate();
-			repaint();
-		}else if(name.equals("ViewFrame")){
+	private int windowMode;
+	
+	public void change() {
+		if(this.windowMode == 0) {
 			getContentPane().removeAll();
 			getContentPane().add(viewframe);
 			revalidate();
 			repaint();
+			this.windowMode = 1;
+		}else if(this.windowMode == 1){
+			getContentPane().removeAll();
+			getContentPane().add(mainframe);
+			revalidate();
+			repaint();
+			this.windowMode = 0;
 		}
 	}
 	
 	public Aireview() {
 		super("에어리뷰");
-		
-		this.mainframe = new MainFrame(this);
-		this.viewframe = new ViewFrame(this);
-		this.add(this.mainframe);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		System.out.println(this.getSize());
 		this.setSize(1200,800);
-		this.setVisible(true);
+		this.myac = new MyActionListener(this);
+		this.mainframe = new MainFrame(this,myac);
+		this.viewframe = new ViewFrame(this,myac);
+		this.windowMode = 0;
+		
+		
+		this.add(this.mainframe);
 	}
 	
 	public static void main(String[] args) {
-		new Aireview();
+		JFrame fr = new Aireview();
+		fr.setVisible(true);
+		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		new MyDatabase();
 	}
 }

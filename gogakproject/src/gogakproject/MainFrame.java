@@ -1,70 +1,78 @@
 package gogakproject;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import gogakproject.MainFrame.MyActionListener;
-
 public class MainFrame extends JPanel{
-	private JButton btn1;
-	private JButton btn2;
-	private JButton btn3;
-	private JButton btn4;
-	
-	private JScrollPane jScrollPane1;
-	private JTextField textField;
-	private JTextArea textArea;
 	private Aireview a;
+	private int Sortmode;
+	private MyActionListener myac;
 	
-	public MainFrame(Aireview a) {
+	
+	public MainFrame(Aireview a,MyActionListener ac) {
+		
 		this.a = a;
 		setLayout(null);
+		this.myac = ac;
+		String [] Sort_List = {"가나다","글자 길이순","그외 등등"};
+		String [] Search_List = {"영문공항명","한글공항명","그외 등등"};
 		
-		btn1 = new JButton("정렬");
-		btn1.setSize(70,20);
-		btn1.setLocation(10,10);
-		add(btn1);
+		System.out.println(a.getSize());
 		
-		btn2 = new JButton("검색 조건");
-		btn2.setSize(70,20);
-		btn2.setLocation(90,10);
-		add(btn2);
+		JPanel topMenu = new JPanel();
+		topMenu.setLayout(new BoxLayout(topMenu,FlowLayout.LEFT));
+		topMenu.setSize(a.getWidth(),20);
+		topMenu.setLocation(0,0);
 		
-		btn3 = new JButton("검색");
-		btn3.setSize(70,20);
-		btn3.setLocation(680,10);
-		add(btn3);
+		JComboBox Box_Sort = new JComboBox(Sort_List);
+		Box_Sort.setSize(100,20);
 		
-		btn4 = new JButton("화면 전환");
-		btn4.setSize(100,20);
-		btn4.setLocation(680,630);
-		add(btn4);
+		topMenu.add(new JLabel("정렬"));
+		topMenu.add(Box_Sort);
 		
-		textField = new JTextField();
-		textField.setBounds(170, 10,500,20);
-		add(textField);
+		JComboBox btn_SearchCondition = new JComboBox(Search_List);
+		btn_SearchCondition.setSize(100,20);
+		topMenu.add(new JLabel("검색 조건"));
+		topMenu.add(btn_SearchCondition);
+		
+		JTextField textField = new JTextField();
+		textField.setSize(a.getWidth() - 400,20);
 		textField.setColumns(10);
 		
-		textArea = new JTextArea();
+		topMenu.add(textField);
 		
-		jScrollPane1 = new JScrollPane(textArea);
-		jScrollPane1.setSize(100,600);
-		jScrollPane1.setLocation(30,50);
-		add(jScrollPane1);
-			
-		btn4.addActionListener(new MyActionListener());
-	}
-	class MyActionListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			a.change("ViewFrame");
-		}
+		JButton btn_Search = new JButton("검색");
+		btn_Search.setSize(70,20);
+		btn_Search.setLocation(710,10);
+		topMenu.add(btn_Search);
+		
+//		topMenu.setBackground(Color.white);
+		this.add(topMenu);
+
+		
+		JButton btn_ChangeWindow = new JButton("화면 전환");
+		btn_ChangeWindow.setSize(100,20);
+		btn_ChangeWindow.setLocation(680,630);
+		add(btn_ChangeWindow);
+		btn_ChangeWindow.addActionListener(this.myac);
+		
 		
 	}
 }

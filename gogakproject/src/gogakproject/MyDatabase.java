@@ -30,8 +30,18 @@ public class MyDatabase {
 		
 		while(rs.next()) {
 			System.out.println(rs.getString(1) + "\t");
-			System.out.println("arasd");
 		}
+	}
+	public String[] getData() throws SQLException {
+		String[] as = null;
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		int cnt = 0;
+		
+		while(rs.next()) {
+			as[cnt] = rs.getString(1);
+		}
+		return as;
 	}
 	public MyDatabase() {
 		connectMyDatabase();
