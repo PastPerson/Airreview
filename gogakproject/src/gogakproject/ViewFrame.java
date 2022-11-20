@@ -15,10 +15,5 @@ public class ViewFrame extends JPanel{
 		setLayout(null);
 		this.myac = ac;
 		
-		JButton btn1 = new JButton("화면 전환");
-		btn1.setSize(100,20);
-		btn1.setLocation(680,630);
-		add(btn1);
-		btn1.addActionListener(myac);
 	}
 }

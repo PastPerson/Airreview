@@ -33,22 +33,19 @@ public class MyDatabase {
 		}
 	}
 	public String[] getData() throws SQLException {
-		String[] as = null;
+		
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		int cnt = 0;
 		
+		String[] as = new String[2604];
+		
 		while(rs.next()) {
-			as[cnt] = rs.getString(1);
+			as[cnt++] = rs.getString(1);
 		}
 		return as;
 	}
 	public MyDatabase() {
 		connectMyDatabase();
-		try {
-			printData();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 }
