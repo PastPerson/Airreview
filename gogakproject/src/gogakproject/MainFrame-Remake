@@ -71,13 +71,13 @@ public class MainFrame extends JPanel{
 		
 		JTextField textField = new JTextField();
 		textField.setSize(a.getWidth() - 600,20);
-		textField.setLocation(300, 100);
+		textField.setLocation(250, 100);
 		textField.setColumns(10);		
 		add(textField);
 		
 		JButton btn_Search = new JButton("검색");
 		btn_Search.setSize(70,20);
-		btn_Search.setLocation(915,100);
+		btn_Search.setLocation(865,100);
 		add(btn_Search);
 		
 		JButton btn_ChangeWindow = new JButton("화면 전환");
@@ -85,7 +85,13 @@ public class MainFrame extends JPanel{
 		btn_ChangeWindow.setLocation(900,650);
 		add(btn_ChangeWindow);
 		btn_ChangeWindow.addActionListener(this.myac);
-		
-		
+			
 	}
+	public void paintComponent(Graphics g) {
+		   super.paintComponent(g);
+
+		   g.setColor(Color.BLACK);
+		   g.drawRoundRect(200, 80, 800, 100, 20, 20);
+
+}
 }
