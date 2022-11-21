@@ -76,3 +76,4 @@ public class ViewFrame extends JPanel{
 	}
 		
 	}
+
