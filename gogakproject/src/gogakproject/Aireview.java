@@ -12,7 +12,6 @@ public class Aireview extends JFrame {
 	private ViewFrame viewframe = null;
 	private MyActionListener myac = null;
 	private static MyDatabase mydb = null;
-	
 	private int windowMode;
 	
 	public void change() {
@@ -39,33 +38,20 @@ public class Aireview extends JFrame {
 		super("에어리뷰");
 		try {
 			mydb = new MyDatabase();
-			mydb.printData();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		System.out.println(this.getSize());
 		this.setSize(1200,800);
 		this.myac = new MyActionListener(this);
 		this.mainframe = new MainFrame(this,myac);
 		this.viewframe = new ViewFrame(this,myac);
 		this.windowMode = 0;
-		
 		this.add(this.mainframe);
-	}
-	
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		
-		
 	}
 	
 	public static void main(String[] args) {
 		JFrame fr = new Aireview();
 		fr.setVisible(true);
 		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		
 	}
 }
