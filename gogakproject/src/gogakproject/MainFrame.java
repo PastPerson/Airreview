@@ -4,6 +4,7 @@ import java.sql.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.tree.*;
 
 public class MainFrame extends JPanel{
 	private Aireview a;
@@ -23,6 +24,30 @@ public class MainFrame extends JPanel{
 		JComboBox Box_Sort = new JComboBox(Sort_List);
 		Box_Sort.setSize(100,20);
 		Box_Sort.setLocation(390, 130);
+		
+		JTree tree = new JTree();
+		tree.setSize(100, 600);
+		tree.setBackground(null);
+		tree.setLocation(50, 90);
+		tree.setModel(new DefaultTreeModel(
+				new DefaultMutableTreeNode("카테고리") {
+					{
+						DefaultMutableTreeNode category;
+						category = new DefaultMutableTreeNode("Tree1");
+						category.add(new DefaultMutableTreeNode(""));
+						add(category);
+						
+						category = new DefaultMutableTreeNode("Tree2");
+						category.add(new DefaultMutableTreeNode(""));
+						add(category);
+						
+						category = new DefaultMutableTreeNode("Tree3");
+						category.add(new DefaultMutableTreeNode(""));
+						add(category);
+					}
+				}
+			));
+		add(tree);
 		
 		JLabel B_Sort = new JLabel("정렬");
 		B_Sort.setSize(100, 20);
