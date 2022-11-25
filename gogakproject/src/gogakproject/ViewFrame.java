@@ -1,19 +1,10 @@
 package gogakproject;
 
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.JSplitPane;
-import javax.swing.JDesktopPane;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
+import javax.swing.border.*;
 
 public class ViewFrame extends JPanel{
 	private Aireview a;
@@ -24,7 +15,7 @@ public class ViewFrame extends JPanel{
 		this.myac = ac;
 		JButton btn1 = new JButton("화면 전환");
 		btn1.setSize(100,29);
-		btn1.setLocation(900,650);
+		btn1.setLocation(1050,690);
 		add(btn1);
 		btn1.addActionListener(myac);
 		
@@ -47,6 +38,11 @@ public class ViewFrame extends JPanel{
 		add(btnNewButton_2);
 		add(btnNewButton_1);
 		
+		JLabel graph_screen = new JLabel("Graph_Screen");
+		graph_screen.setSize(100, 20);
+		graph_screen.setLocation(320, 90);
+		add(graph_screen);
+		
 		JDesktopPane desktopPane = new JDesktopPane();
 		add(desktopPane);
 		
@@ -63,15 +59,20 @@ public class ViewFrame extends JPanel{
 		Font font = new Font("맑은 고딕", Font.PLAIN, 30);
 		screen.setFont(getFont().deriveFont(20.0f));
 		add(screen);
-		screen.setForeground(Color.BLACK);
+		screen.setForeground(Color.BLACK); //글씨 색
 	}
+		  //도형 및 선 제작
 		  public void paintComponent(Graphics g) {
 			   super.paintComponent(g);
-
+			   //색 정하기
 			   g.setColor(Color.BLACK);
+			   //둥근 사각형 제작
 			   g.drawRoundRect(30, 110, 200, 500, 20, 20);
+			   //직선 제작
 			   g.drawLine(30, 200, 230, 200);
+			   //둥근 사각형 제작
 			   g.drawRoundRect(320, 110, 700, 500, 20, 20);
 
-	}	
-}
+	}
+		
+	}
