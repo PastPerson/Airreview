@@ -32,7 +32,7 @@ public class MainFrame extends JPanel{
 		
 		JLabel search = new JLabel("Search");
 		search.setSize(100, 20);
-		search.setLocation(200, 60);
+		search.setLocation(220, 60);
 		add(search);
 		
 		JLabel list = new JLabel("Category");
@@ -42,7 +42,7 @@ public class MainFrame extends JPanel{
 		
 		JLabel screen = new JLabel("Screen");
 		screen.setSize(100, 20);
-		screen.setLocation(200, 180);
+		screen.setLocation(220, 180);
 		add(screen);
 		
 		JComboBox btn_SearchCondition = new JComboBox(Search_List);
@@ -81,9 +81,9 @@ public class MainFrame extends JPanel{
 		   super.paintComponent(g);
 
 		   g.setColor(Color.BLACK);
-		   g.drawRoundRect(200, 80, 800, 100, 20, 20);
+		   g.drawRoundRect(220, 80, 800, 100, 20, 20);
 		   g.drawRoundRect(40, 80, 150, 650, 20, 20);
-		   g.drawRoundRect(200, 200, 800, 530, 20, 20);
+		   g.drawRoundRect(220, 200, 800, 530, 20, 20);
 
 }
 }
