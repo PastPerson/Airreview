@@ -13,6 +13,15 @@ public class MyActionListener implements ActionListener{
 			a.change();
 		}
 	}
+	
+	public void actionPerformed2(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		switch(cmd) {
+		case "검색":
+			
+		}
+	}
+	
 	public MyActionListener(Aireview a) {
 		super();
 		this.a = a;

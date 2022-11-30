@@ -1,6 +1,7 @@
 package gogakproject;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -19,6 +20,12 @@ public class MainFrame extends JPanel{
 		String [] Sort_List = {"가나다","글자 길이순","그외 등등"};
 		String [] Search_List = {"영문공항명","한글공항명","그외 등등"};
 		
+		MyDatabase md = new MyDatabase();
+		
+		ArrayList<String> loc = md.getLocData();
+		//ArrayList<String> country0 = md.getCountryData(loc.get(0));
+		
+		
 		System.out.println(a.getSize());
 		
 		JComboBox Box_Sort = new JComboBox(Sort_List);
@@ -26,24 +33,64 @@ public class MainFrame extends JPanel{
 		Box_Sort.setLocation(390, 130);
 		
 		JTree tree = new JTree();
-		tree.setSize(100, 600);
+		tree.setSize(170, 800);
 		tree.setBackground(null);
 		tree.setLocation(50, 90);
 		tree.setModel(new DefaultTreeModel(
-				new DefaultMutableTreeNode("카테고리") {
+				new DefaultMutableTreeNode("지역") {
 					{
 						DefaultMutableTreeNode category;
-						category = new DefaultMutableTreeNode("Tree1");
-						category.add(new DefaultMutableTreeNode(""));
+
+						category = new DefaultMutableTreeNode(loc.get(0));
+						for(int i=0;i <md.getCountryData(loc.get(0)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(0)).get(i)));
+						}
 						add(category);
 						
-						category = new DefaultMutableTreeNode("Tree2");
-						category.add(new DefaultMutableTreeNode(""));
+						category = new DefaultMutableTreeNode(loc.get(1));
+
+
+						for(int i=0;i <md.getCountryData(loc.get(1)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(1)).get(i)));
+						}
 						add(category);
-						
-						category = new DefaultMutableTreeNode("Tree3");
-						category.add(new DefaultMutableTreeNode(""));
+//왠지 모르게 지역이 나옴						
+//						category = new DefaultMutableTreeNode(loc.get(2));
+//						for(int i=0;i <md.getCountryData(loc.get(2)).size(); i++) {
+//							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(2)).get(i)));
+//						}
+//						add(category);
+
+						category = new DefaultMutableTreeNode(loc.get(3));
+						for(int i=0;i <md.getCountryData(loc.get(3)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(3)).get(i)));
+						}
 						add(category);
+
+						category = new DefaultMutableTreeNode(loc.get(4));
+						for(int i=0;i <md.getCountryData(loc.get(4)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(4)).get(i)));
+						}
+						add(category);
+						category = new DefaultMutableTreeNode(loc.get(5));
+						for(int i=0;i <md.getCountryData(loc.get(5)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(5)).get(i)));
+						}
+						add(category);
+
+						category = new DefaultMutableTreeNode(loc.get(6));
+						for(int i=0;i <md.getCountryData(loc.get(6)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(6)).get(i)));
+						}
+						add(category);
+
+						category = new DefaultMutableTreeNode(loc.get(7));
+						for(int i=0;i <md.getCountryData(loc.get(7)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(7)).get(i)));
+						}
+						add(category);
+
+
 					}
 				}
 			));
@@ -57,17 +104,17 @@ public class MainFrame extends JPanel{
 		
 		JLabel search = new JLabel("Search");
 		search.setSize(100, 20);
-		search.setLocation(220, 60);
+		search.setLocation(250, 60);
 		add(search);
 		
-		JLabel list = new JLabel("Category");
+		JLabel list = new JLabel("지역");
 		list.setSize(100, 20);
 		list.setLocation(40, 60);
 		add(list);
 		
 		JLabel screen = new JLabel("Screen");
 		screen.setSize(100, 20);
-		screen.setLocation(220, 180);
+		screen.setLocation(250, 180);
 		add(screen);
 		
 		JComboBox btn_SearchCondition = new JComboBox(Search_List);
@@ -81,8 +128,8 @@ public class MainFrame extends JPanel{
 		add(btn_SearchCondition);
 		
 		JTextField textField = new JTextField();
-		textField.setSize(a.getWidth() - 600,20);
-		textField.setLocation(250, 100);
+		textField.setSize(a.getWidth() - 800,20);
+		textField.setLocation(270, 100);
 		textField.setColumns(10);
 		textField.setOpaque(true);
 		textField.setBackground(Color.white);
@@ -91,14 +138,18 @@ public class MainFrame extends JPanel{
 		
 		JButton btn_Search = new JButton("검색");
 		btn_Search.setSize(70,20);
-		btn_Search.setLocation(865,100);
+		btn_Search.setLocation(1005,100);
 		add(btn_Search);
+		btn_Search.addActionListener(this.myac);
 		
 		JButton btn_ChangeWindow = new JButton("화면 전환");
 		btn_ChangeWindow.setSize(100,29);
-		btn_ChangeWindow.setLocation(1050,690);
+		btn_ChangeWindow.setLocation(1300,890);
 		add(btn_ChangeWindow);
 		btn_ChangeWindow.addActionListener(this.myac);
+		
+		
+		
 		
 
 	}
@@ -106,9 +157,9 @@ public class MainFrame extends JPanel{
 		   super.paintComponent(g);
 
 		   g.setColor(Color.BLACK);
-		   g.drawRoundRect(220, 80, 800, 100, 20, 20);
-		   g.drawRoundRect(40, 80, 150, 650, 20, 20);
-		   g.drawRoundRect(220, 200, 800, 530, 20, 20);
+		   g.drawRoundRect(260, 80, 1000, 100, 20, 20);
+		   g.drawRoundRect(40, 80, 180, 850, 20, 20);
+		   g.drawRoundRect(260, 200, 1000, 730, 20, 20);
 
 }
 }
