@@ -18,7 +18,7 @@ public class MainFrame extends JPanel{
 		setLayout(null);
 		this.myac = ac;
 		String [] Sort_List = {"가나다","글자 길이순","그외 등등"};
-		String [] Search_List = {"영문공항명","한글공항명","그외 등등"};
+		String [] Search_List = {"영문공항명","한글공항명","코드1","코드2","지역","나라명(영어)","나라명(한글)","도시명"};
 		
 		MyDatabase md = new MyDatabase();
 		
@@ -54,12 +54,12 @@ public class MainFrame extends JPanel{
 							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(1)).get(i)));
 						}
 						add(category);
-//왠지 모르게 지역이 나옴						
-//						category = new DefaultMutableTreeNode(loc.get(2));
-//						for(int i=0;i <md.getCountryData(loc.get(2)).size(); i++) {
-//							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(2)).get(i)));
-//						}
-//						add(category);
+					
+						category = new DefaultMutableTreeNode(loc.get(2));
+						for(int i=0;i <md.getCountryData(loc.get(2)).size(); i++) {
+							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(2)).get(i)));
+						}
+						add(category);
 
 						category = new DefaultMutableTreeNode(loc.get(3));
 						for(int i=0;i <md.getCountryData(loc.get(3)).size(); i++) {
@@ -89,8 +89,6 @@ public class MainFrame extends JPanel{
 							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(7)).get(i)));
 						}
 						add(category);
-
-
 					}
 				}
 			));

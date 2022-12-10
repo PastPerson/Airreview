@@ -25,7 +25,7 @@ public class MyDatabase {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("데이터베이스에 연결 중");
-			con = DriverManager.getConnection(url,"root","jimin6016");
+			con = DriverManager.getConnection(url,"root","junni1561");
 			System.out.println("데이터베이스에 연결 성공");
 		}catch(ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
@@ -40,9 +40,11 @@ public class MyDatabase {
 		try {
 			Statement state = con.createStatement();
 			state.execute("DROP TABLE airportdata;");
-			importdata();
+			
 		}catch(SQLException e){
 			e.printStackTrace();
+		}finally{
+			importdata();
 		}
 	}
 	public void importdata() {
@@ -61,7 +63,7 @@ public class MyDatabase {
                     " `country_kor` VARCHAR(100),\n"+
                     " `city_eng` VARCHAR(100),\n"+
                     " PRIMARY KEY (`code1`));");
-			File file = new File("C:\\Users\\jikun\\IdeaProjects\\Airreview\\gogakproject\\국토교통부_세계공항_정보_20211231.csv");
+			File file = new File("./국토교통부_세계공항_정보_20211231.csv");
 			
 			List<String[]> result = new ArrayList<String[]>();
 			try {
@@ -69,6 +71,7 @@ public class MyDatabase {
 				BufferedReader in = new BufferedReader(fr);
 				Charset.forName("UTF-8");
 				String line;
+				line = in.readLine();
 				while((line = in.readLine()) != null) {
 					String[] arr = line.split(",");
 					if(arr.length == 8) {

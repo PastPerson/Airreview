@@ -8,17 +8,14 @@ public class MyActionListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		switch(cmd) {
-		case "화면 전환":
-			a.change();
-		}
-	}
-	
-	public void actionPerformed2(ActionEvent e) {
-		String cmd = e.getActionCommand();
+		System.out.println(cmd);
 		switch(cmd) {
 		case "검색":
-			
+			System.out.println("검색중");
+			break;
+		case "화면 전환":
+			a.change();
+			break;
 		}
 	}
 	
