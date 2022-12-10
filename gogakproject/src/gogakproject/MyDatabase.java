@@ -54,15 +54,15 @@ public class MyDatabase {
 			StringBuilder sb = new StringBuilder();
 //			String sql = ;
 			state.execute("CREATE TABLE `airportdata`(\n"+
-                    " `name_eng` VARCHAR(100),\n"+
-                    " `name_kor` VARCHAR(100),\n"+
-                    " `code1` VARCHAR(100),\n"+
-                    " `code2` VARCHAR(100),\n"+ 
-                    " `location` VARCHAR(100),\n"+
-                    " `country_eng` VARCHAR(100),\n"+
-                    " `country_kor` VARCHAR(100),\n"+
-                    " `city_eng` VARCHAR(100),\n"+
-                    " PRIMARY KEY (`code1`));");
+                    " `영문공항명` VARCHAR(100),\n"+
+                    " `한글공항명` VARCHAR(100),\n"+
+                    " `코드1` VARCHAR(100),\n"+
+                    " `코드2` VARCHAR(100),\n"+ 
+                    " `지역` VARCHAR(100),\n"+
+                    " `영문나라명` VARCHAR(100),\n"+
+                    " `한글나라명` VARCHAR(100),\n"+
+                    " `도시명` VARCHAR(100),\n"+
+                    " PRIMARY KEY (`코드1`));");
 			File file = new File("./국토교통부_세계공항_정보_20211231.csv");
 			
 			List<String[]> result = new ArrayList<String[]>();
@@ -83,7 +83,7 @@ public class MyDatabase {
 			}
 			for(String[] item : result) {
 				String query = "insert into airportdata"
-						+ "(name_eng,name_kor,code1,code2,location,country_eng,country_kor,city_eng)"
+						+ "(영문공항명,한글공항명,코드1,코드2,지역,영문나라명,한글나라명,도시명)"
 						+ " values ('"
 						+ item[0] + "','"
 						+ item[1] + "','"
@@ -105,7 +105,7 @@ public class MyDatabase {
 	}
 	public ArrayList getLocData(){
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT location FROM airportdata");
+			PreparedStatement ps = con.prepareStatement("SELECT 지역 FROM airportdata");
 			ResultSet rs = ps.executeQuery();
 			
 			ArrayList<String> arr = new ArrayList<String> ();
@@ -125,10 +125,31 @@ public class MyDatabase {
 		}
 		return null;
 	}
-	
+	public ArrayList getAirportData(String type, String target) {
+		try {
+			String sql = "SELECT * FROM airportdata WHERE " + type + " Like " + "'" + target + "'";
+			System.out.println(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			ArrayList<String> arr = new ArrayList<>();
+			
+			while(rs.next()){
+				for(int i = 1 ; i <= 8 ; i++) {
+					arr.add(rs.getString(i));
+				}
+			}
+			
+			System.out.println(arr);
+			return arr;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public ArrayList getCountryData(String loc){
 		try {
-			String sql = "SELECT country_kor FROM airportdata WHERE location LIKE " + "'" +loc+"'";
+			String sql = "SELECT 한글나라명 FROM airportdata WHERE 지역 LIKE " + "'" +loc+"'";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();

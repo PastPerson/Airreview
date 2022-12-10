@@ -3,6 +3,9 @@ package gogakproject;
 import java.sql.*;
 import java.util.ArrayList;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.tree.*;
@@ -10,7 +13,9 @@ import javax.swing.tree.*;
 public class MainFrame extends JPanel{
 	private Aireview a;
 	private int Sortmode;
-	private MyActionListener myac;	
+	private MyActionListener myac;
+	private JTextField textField;
+	private JComboBox btn_SearchCondition;
 	
 	public MainFrame(Aireview a,MyActionListener ac) {
 		
@@ -18,13 +23,11 @@ public class MainFrame extends JPanel{
 		setLayout(null);
 		this.myac = ac;
 		String [] Sort_List = {"가나다","글자 길이순","그외 등등"};
-		String [] Search_List = {"영문공항명","한글공항명","코드1","코드2","지역","나라명(영어)","나라명(한글)","도시명"};
+		String [] Search_List = {"영문공항명","한글공항명","코드1","코드2","지역","영문나라명","한글나라명","도시명"};
 		
 		MyDatabase md = new MyDatabase();
 		
-		ArrayList<String> loc = md.getLocData();
-		//ArrayList<String> country0 = md.getCountryData(loc.get(0));
-		
+		ArrayList<String> loc = md.getLocData();		
 		
 		System.out.println(a.getSize());
 		
@@ -115,7 +118,7 @@ public class MainFrame extends JPanel{
 		screen.setLocation(250, 180);
 		add(screen);
 		
-		JComboBox btn_SearchCondition = new JComboBox(Search_List);
+		btn_SearchCondition = new JComboBox(Search_List);
 		btn_SearchCondition.setSize(100,20);
 		btn_SearchCondition.setLocation(560, 130);
 		
@@ -125,7 +128,7 @@ public class MainFrame extends JPanel{
 		add(S_Sort);
 		add(btn_SearchCondition);
 		
-		JTextField textField = new JTextField();
+		textField = new JTextField();
 		textField.setSize(a.getWidth() - 800,20);
 		textField.setLocation(270, 100);
 		textField.setColumns(10);
@@ -138,18 +141,18 @@ public class MainFrame extends JPanel{
 		btn_Search.setSize(70,20);
 		btn_Search.setLocation(1005,100);
 		add(btn_Search);
-		btn_Search.addActionListener(this.myac);
+		btn_Search.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showAirportInfo(md.getAirportData(btn_SearchCondition.getSelectedItem().toString(), textField.getText()));
+			}
+		});
 		
 		JButton btn_ChangeWindow = new JButton("화면 전환");
 		btn_ChangeWindow.setSize(100,29);
 		btn_ChangeWindow.setLocation(1300,890);
 		add(btn_ChangeWindow);
 		btn_ChangeWindow.addActionListener(this.myac);
-		
-		
-		
-		
-
 	}
 	public void paintComponent(Graphics g) {
 		   super.paintComponent(g);
@@ -158,6 +161,34 @@ public class MainFrame extends JPanel{
 		   g.drawRoundRect(260, 80, 1000, 100, 20, 20);
 		   g.drawRoundRect(40, 80, 180, 850, 20, 20);
 		   g.drawRoundRect(260, 200, 1000, 730, 20, 20);
-
-}
+	}
+	public void showAirportInfo(ArrayList<String> info) {
+		JLabel info_engName = new JLabel("공항 이름(영어) : " + info.get(0));
+		info_engName.setBounds(270,200,400,20);
+		add(info_engName);
+		JLabel info_korName = new JLabel("공항 이름(한글) : " + info.get(1));
+		info_korName.setBounds(270,230,400,20);
+		add(info_korName);
+		JLabel info_iata = new JLabel("IATA : " + info.get(2));
+		info_iata.setBounds(270,260,250,20);
+		add(info_iata);
+		JLabel info_icao = new JLabel("ICAO : " + info.get(3));
+		info_icao.setBounds(270,290,250,20);
+		add(info_icao);
+		JLabel info_location = new JLabel("지역 : " + info.get(4));
+		info_location.setBounds(270,320,250,20);
+		add(info_location);
+		JLabel info_engCountry = new JLabel("국가명(영어) : " + info.get(5));
+		info_engCountry.setBounds(270,350,250,20);
+		add(info_engCountry);
+		JLabel info_korCountry = new JLabel("국가명(한글) : " + info.get(6));
+		info_korCountry.setBounds(270,380,250,20);
+		add(info_korCountry);
+		JLabel info_city = new JLabel("도시(영문) : " + info.get(7));
+		info_city.setBounds(270,410,250,20);
+		add(info_city);
+		
+		
+		repaint();
+	}
 }
