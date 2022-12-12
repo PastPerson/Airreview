@@ -21,11 +21,11 @@ public class MyDatabase {
 	private Connection con = null;
 	
 	public void connectMyDatabase() {
-		
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("데이터베이스에 연결 중");
-			con = DriverManager.getConnection(url,"root","junni1561");
+			con = DriverManager.getConnection(url,"root","jimin6016");
 			System.out.println("데이터베이스에 연결 성공");
 		}catch(ClassNotFoundException ex) {
 			System.out.println(ex.getMessage());
@@ -63,7 +63,7 @@ public class MyDatabase {
                     " `한글나라명` VARCHAR(100),\n"+
                     " `도시명` VARCHAR(100),\n"+
                     " PRIMARY KEY (`코드1`));");
-			File file = new File("./국토교통부_세계공항_정보_20211231.csv");
+			File file = new File("C:\\\\Users\\\\jikun\\\\IdeaProjects\\\\Airreview\\\\gogakproject\\\\국토교통부_세계공항_정보_20211231.csv");
 			
 			List<String[]> result = new ArrayList<String[]>();
 			try {
@@ -125,7 +125,7 @@ public class MyDatabase {
 		}
 		return null;
 	}
-	public ArrayList getAirportData(String type, String target) {
+	public ArrayList<String> getAirportData(String type, String target) {
 		try {
 			String sql = "SELECT * FROM airportdata WHERE " + type + " Like " + "'" + target + "'";
 			System.out.println(sql);
@@ -136,7 +136,7 @@ public class MyDatabase {
 			
 			while(rs.next()){
 				for(int i = 1 ; i <= 8 ; i++) {
-					arr.add(rs.getString(i));
+					System.out.println(arr.add(rs.getString(i)));
 				}
 			}
 			

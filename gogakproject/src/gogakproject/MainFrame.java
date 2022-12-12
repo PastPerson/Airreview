@@ -74,7 +74,8 @@ public class MainFrame extends JPanel{
 						for(int i=0;i <md.getCountryData(loc.get(4)).size(); i++) {
 							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(4)).get(i)));
 						}
-						add(category);
+						add(category);
+
 						category = new DefaultMutableTreeNode(loc.get(5));
 						for(int i=0;i <md.getCountryData(loc.get(5)).size(); i++) {
 							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(5)).get(i)));
@@ -144,7 +145,9 @@ public class MainFrame extends JPanel{
 		btn_Search.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				showAirportInfo(md.getAirportData(btn_SearchCondition.getSelectedItem().toString(), textField.getText()));
+
 			}
 		});
 		
@@ -162,29 +165,46 @@ public class MainFrame extends JPanel{
 		   g.drawRoundRect(40, 80, 180, 850, 20, 20);
 		   g.drawRoundRect(260, 200, 1000, 730, 20, 20);
 	}
+	JLabel info_engName = new JLabel("공항 이름(영어) : ");
+	JLabel info_korName = new JLabel("공항 이름(한글) : ");
+	JLabel info_iata = new JLabel("IATA : ");
+	JLabel info_icao = new JLabel("ICAO : ");
+	JLabel info_location = new JLabel("지역 : ");
+	JLabel info_engCountry = new JLabel("국가명(영어) : ");
+	JLabel info_korCountry = new JLabel("국가명(한글) : ");
+	JLabel info_city = new JLabel("도시(영문) : ");
 	public void showAirportInfo(ArrayList<String> info) {
-		JLabel info_engName = new JLabel("공항 이름(영어) : " + info.get(0));
+
+
+		info_engName.setText("공항 이름(영어) :" + info.get(0));
 		info_engName.setBounds(270,200,400,20);
 		add(info_engName);
-		JLabel info_korName = new JLabel("공항 이름(한글) : " + info.get(1));
+
+		info_korName.setText("공항 이름(한글) : " + info.get(1));
 		info_korName.setBounds(270,230,400,20);
 		add(info_korName);
-		JLabel info_iata = new JLabel("IATA : " + info.get(2));
+
+		info_iata.setText("IATA : " + info.get(2));
 		info_iata.setBounds(270,260,250,20);
 		add(info_iata);
-		JLabel info_icao = new JLabel("ICAO : " + info.get(3));
+
+		info_icao.setText("ICAO : " + info.get(3));
 		info_icao.setBounds(270,290,250,20);
 		add(info_icao);
-		JLabel info_location = new JLabel("지역 : " + info.get(4));
+
+		info_location.setText("지역 : " + info.get(4));
 		info_location.setBounds(270,320,250,20);
 		add(info_location);
-		JLabel info_engCountry = new JLabel("국가명(영어) : " + info.get(5));
+
 		info_engCountry.setBounds(270,350,250,20);
+		info_engCountry.setText("국가명(영어) : " + info.get(5));
 		add(info_engCountry);
-		JLabel info_korCountry = new JLabel("국가명(한글) : " + info.get(6));
+
+		info_korCountry.setText("국가명(한글) : " + info.get(6));
 		info_korCountry.setBounds(270,380,250,20);
 		add(info_korCountry);
-		JLabel info_city = new JLabel("도시(영문) : " + info.get(7));
+
+		info_city.setText("도시(영문) : " + info.get(7));
 		info_city.setBounds(270,410,250,20);
 		add(info_city);
 		
