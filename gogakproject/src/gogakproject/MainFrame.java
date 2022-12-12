@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.*;
 
 public class MainFrame extends JPanel{
@@ -34,7 +35,10 @@ public class MainFrame extends JPanel{
 		JComboBox Box_Sort = new JComboBox(Sort_List);
 		Box_Sort.setSize(100,20);
 		Box_Sort.setLocation(390, 130);
-		
+
+		TreeSelectionListener listener =
+				new MyTreeSelectionListener();
+
 		JTree tree = new JTree();
 		tree.setSize(170, 800);
 		tree.setBackground(null);
@@ -97,6 +101,9 @@ public class MainFrame extends JPanel{
 				}
 			));
 		add(tree);
+
+		tree.addTreeSelectionListener (listener);
+
 		
 		JLabel B_Sort = new JLabel("정렬");
 		B_Sort.setSize(100, 20);

@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Vector;
 
 public class MyDatabase {
 	private String url = "jdbc:mysql://localhost:3306/airportdata?useUnicode=true&serverTimezone=UTC";
@@ -147,6 +148,10 @@ public class MyDatabase {
 		}
 		return null;
 	}
+
+
+
+
 	public ArrayList getCountryData(String loc){
 		try {
 			String sql = "SELECT 한글나라명 FROM airportdata WHERE 지역 LIKE " + "'" +loc+"'";
