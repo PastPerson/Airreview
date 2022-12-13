@@ -152,6 +152,7 @@ public class MyDatabase {
 
 
 
+
 	public ArrayList getCountryData(String loc){
 		try {
 			String sql = "SELECT 한글나라명 FROM airportdata WHERE 지역 LIKE " + "'" +loc+"'";

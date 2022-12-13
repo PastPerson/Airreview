@@ -180,6 +180,8 @@ public class MainFrame extends JPanel{
 	JLabel info_engCountry = new JLabel("국가명(영어) : ");
 	JLabel info_korCountry = new JLabel("국가명(한글) : ");
 	JLabel info_city = new JLabel("도시(영문) : ");
+
+
 	public void showAirportInfo(ArrayList<String> info) {
 
 
