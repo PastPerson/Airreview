@@ -8,8 +8,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.*;
+
 
 public class MainFrame extends JPanel{
 	private Aireview a;
@@ -19,19 +22,19 @@ public class MainFrame extends JPanel{
 	private JComboBox btn_SearchCondition;
 	
 	public MainFrame(Aireview a,MyActionListener ac) {
-		
+
 		this.a = a;
 		setLayout(null);
 		this.myac = ac;
 		String [] Sort_List = {"가나다","글자 길이순","그외 등등"};
 		String [] Search_List = {"영문공항명","한글공항명","코드1","코드2","지역","영문나라명","한글나라명","도시명"};
-		
+
 		MyDatabase md = new MyDatabase();
-		
-		ArrayList<String> loc = md.getLocData();		
-		
+
+		ArrayList<String> loc = md.getLocData();
+
 		System.out.println(a.getSize());
-		
+
 		JComboBox Box_Sort = new JComboBox(Sort_List);
 		Box_Sort.setSize(100,20);
 		Box_Sort.setLocation(390, 130);
@@ -53,7 +56,7 @@ public class MainFrame extends JPanel{
 							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(0)).get(i)));
 						}
 						add(category);
-						
+
 						category = new DefaultMutableTreeNode(loc.get(1));
 
 
@@ -61,7 +64,7 @@ public class MainFrame extends JPanel{
 							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(1)).get(i)));
 						}
 						add(category);
-					
+
 						category = new DefaultMutableTreeNode(loc.get(2));
 						for(int i=0;i <md.getCountryData(loc.get(2)).size(); i++) {
 							category.add(new DefaultMutableTreeNode(md.getCountryData(loc.get(2)).get(i)));
@@ -102,40 +105,43 @@ public class MainFrame extends JPanel{
 			));
 		add(tree);
 
+
+
 		tree.addTreeSelectionListener (listener);
 
-		
+
+
 		JLabel B_Sort = new JLabel("정렬");
 		B_Sort.setSize(100, 20);
 		B_Sort.setLocation(350, 130);
 		add(B_Sort);
 		add(Box_Sort);
-		
+
 		JLabel search = new JLabel("Search");
 		search.setSize(100, 20);
 		search.setLocation(250, 60);
 		add(search);
-		
+
 		JLabel list = new JLabel("지역");
 		list.setSize(100, 20);
 		list.setLocation(40, 60);
 		add(list);
-		
+
 		JLabel screen = new JLabel("Screen");
 		screen.setSize(100, 20);
 		screen.setLocation(250, 180);
 		add(screen);
-		
+
 		btn_SearchCondition = new JComboBox(Search_List);
 		btn_SearchCondition.setSize(100,20);
 		btn_SearchCondition.setLocation(560, 130);
-		
+
 		JLabel S_Sort = new JLabel("검색 조건");
 		S_Sort.setSize(100, 20);
 		S_Sort.setLocation(500, 130);
 		add(S_Sort);
 		add(btn_SearchCondition);
-		
+
 		textField = new JTextField();
 		textField.setSize(a.getWidth() - 800,20);
 		textField.setLocation(270, 100);
@@ -144,7 +150,7 @@ public class MainFrame extends JPanel{
 		textField.setBackground(Color.white);
 		textField.setForeground(Color.black);
 		add(textField);
-		
+
 		JButton btn_Search = new JButton("검색");
 		btn_Search.setSize(70,20);
 		btn_Search.setLocation(1005,100);
@@ -157,7 +163,7 @@ public class MainFrame extends JPanel{
 
 			}
 		});
-		
+
 		JButton btn_ChangeWindow = new JButton("화면 전환");
 		btn_ChangeWindow.setSize(100,29);
 		btn_ChangeWindow.setLocation(1300,890);
@@ -220,4 +226,6 @@ public class MainFrame extends JPanel{
 		
 		repaint();
 	}
+
+
 }

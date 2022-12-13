@@ -3,10 +3,6 @@ package gogakproject;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.tree.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 
@@ -29,11 +25,7 @@ class MyTreeSelectionListener implements TreeSelectionListener {
     JTable table = new JTable(model1);
 
     JScrollPane scrollPane = new JScrollPane(table);
-
-
-
-
-
+    private Object rowData;
 
 
     public void valueChanged (TreeSelectionEvent event) {
@@ -70,17 +62,19 @@ class MyTreeSelectionListener implements TreeSelectionListener {
                 System.out.println(rowData[i][j].toString());
             }
         }
-        System.out.println(s.length);
-        System.out.println(rowData.length);
+        
 
-       JTable table = new JTable(rowData, column_List);
-        JScrollPane jscp1 = new JScrollPane(table);
-
-
+      
+        
+        
 
 
-        System.out.println ();
+
+        
     }
+
+
+    
 
 
 }
